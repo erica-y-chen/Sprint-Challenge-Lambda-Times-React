@@ -83,7 +83,7 @@ const TopBar = () => {
         </ContainerRight>
       </Container>
     </Topbar>
-  )
+  ) 
 }
 
 export default TopBar;

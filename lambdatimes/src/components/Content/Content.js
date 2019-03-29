@@ -11,8 +11,8 @@ export default class Content extends Component {
     super(props);
     this.state = {
       selected: 'all',
-      tabs: [],
-      cards: []
+      tabs: tabData,
+      cards: cardData
     };
   }
 
@@ -21,10 +21,26 @@ export default class Content extends Component {
   }
 
   changeSelected = tab => {
+    console.log(tab);
+    this.setState({
+      selected: this.state.tab,
+    })
+
+    console.log(this.state.selected);
     // this function should take in the tab and update the state with the new tab.
   };
 
   filterCards = () => {
+    
+    let filteredList = this.state.cards.filter(
+      card => card.tab === this.state.selected
+    )
+      console.log(filteredList);
+    if (!this.state.selected || this.setState.selected === "all") {
+      filteredList = this.state.cards
+    }
+
+
     /* Right now this function only returns the cards on state.
       We're going to make this function more dynamic
       by using it to filter out our cards for when a tab is selcted
@@ -35,7 +51,7 @@ export default class Content extends Component {
       Your algorithim for the logic here is as follows: 
         - if the selected tab is 'all' it should return all 
           of the items from cardData. 
-        - else, it should only return those cards whose 'tab' matched this.state.selected.
+        - else, it should only return those cards whose 'tab' måatched this.state.selected.
     */
     return this.state.cards;
   };
@@ -48,7 +64,11 @@ export default class Content extends Component {
           `selectedTab` that includes the currently selected tab
           and `selectTabHandler` that includes the function to change the selected tab
         */}
-        <Tabs tabs={this.state.tabs} />
+        <Tabs 
+        tabs={this.state.tabs} 
+        selectedTab = {this.state.selected}
+        selectedTabHandler = {this.changeSelected}
+        />
         <Cards cards={this.filterCards()} />
       </div>
     );
